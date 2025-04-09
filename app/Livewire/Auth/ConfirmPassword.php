@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Auth;
 
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Layout;
@@ -21,8 +22,11 @@ class ConfirmPassword extends Component
             'password' => ['required', 'string'],
         ]);
 
+        /** @var User $user */
+        $user = Auth::user();
+
         if (! Auth::guard('web')->validate([
-            'email' => Auth::user()->email,
+            'email' => $user->email,
             'password' => $this->password,
         ])) {
             throw ValidationException::withMessages([
