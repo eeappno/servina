@@ -26,6 +26,15 @@ jobs:
           tools: composer:v2
           coverage: xdebug
 
+      - name: Create storage and bootstrap cache directories
+        run: |
+            mkdir -p storage/app
+            mkdir -p storage/framework/cache
+            mkdir -p storage/framework/sessions
+            mkdir -p storage/framework/views
+            mkdir -p storage/logs
+            mkdir -p bootstrap/cache
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
